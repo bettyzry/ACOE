@@ -192,13 +192,10 @@ class StreamACOE:
 
         anomaly_rate = sum(label) / len(label) if sum(label) != 0 else 0.000001
 
-
         # 获取新输入点的类型 informativeness 1, representativeness 0
         # 计算查询概率
         representativeness = self.threshold ** (self.threshold / anomaly_rate)
         informativeness = 1 - representativeness
-
-
 
         need_labeled_list = []
         down = self.get_line(score, max(self.threshold - 0.05, 0))
@@ -221,7 +218,6 @@ class StreamACOE:
             representativeness = representativeness * self.query_rate / (1-num_inf)
             informativeness = informativeness * self.query_rate/num_inf
 
-        print(representativeness, informativeness, anomaly_rate)
         for i in group:
             # 以rate的概率进行查询
             alpha = random.uniform(0, 1)

@@ -39,7 +39,7 @@ class PoolACOE:
         t = 0
         t2 = 0
         itera = [0]
-        while abs(self.last_loss - loss) > 0.001 or t2 < 2:  #
+        while abs(self.last_loss - loss) > 0.001 or t2 < 2:
             if abs(self.last_loss - loss) < 0.001:
                 t2 += 1
             self.last_loss = loss
@@ -51,6 +51,10 @@ class PoolACOE:
             loss = loss / len(self.queried)
             self.per = max(sum(l) / len(l), 0.000001)
             self.ano = sum(l)
+
+            # diff_value_normalize = util.getsum_score(score, self.weight)
+            # _, _, _, _, _, _, _, _, _, text = evaluate.evaluate('kpi', True, diff_value_normalize, label, self.prethreshold)
+            # print(text)
 
     ########################  获取局部最优  ####################################
     def part_weight(self, score, label):
@@ -188,7 +192,6 @@ class PoolACOE:
         return s, l
 
     ################### Presure test ###############################
-
     def calculate_test_statistic(self, stresstest, final_stress_index, label, deviation=5):
         __len__ = len(label)
 
